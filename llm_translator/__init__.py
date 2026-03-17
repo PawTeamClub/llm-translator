@@ -75,13 +75,24 @@ def on_user_info(server: ServerInterface, info: Info):
     content = None
     
     try:
+        if "[lobby]" in info.content and not "[global:" in info.content:
+            return
+            
         if info.player:
             player = info.player
             content = info.content
         else:
-            match = re.fullmatch(r'<[^>]+>\s*(.*)', info.content)
+            # 匹配 [global:lobby]<Player> message 格式
+            match = re.fullmatch(r'(?:\[global:[^\]]+\])?<([^>]+)>\s*(.*)', info.content)
             if match:
-                content = match.group(1)
+                player = match.group(1)
+                content = match.group(2)
+            else:
+                # 备用匹配 <Player> message
+                match = re.fullmatch(r'<([^>]+)>\s*(.*)', info.content)
+                if match:
+                    player = match.group(1)
+                    content = match.group(2)
         
         if content and not content.startswith('!!'):
             translator_messages = LLM.use(content)
