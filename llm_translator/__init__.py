@@ -65,8 +65,8 @@ def send_nbt(source: InfoCommandSource, dic: dict):
 
 
 def on_user_info(server: ServerInterface, info: Info):
-    if info.content.startswith("t "):
-        translator_messages = LLM.use(info.content[2:])
+    if info.content:
+        translator_messages = LLM.use(info.content)
         server.say(f"§7[T]<{info.player}> " + f"§f{translator_messages}")
         if config.is_proxy_to_other_servers:
             proxy_message(info.player, translator_messages)

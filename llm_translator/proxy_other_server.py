@@ -15,7 +15,7 @@ def proxy_message(player, message):
 
 
 def proxy(address, port, password, player, message):
-    command = f'/tellraw @a [{{"text":"[T]<{player}> ","color":"gray"}},{{"text":"{message}","color":"white"}}]'
+    command = f'/tellraw @a [{{"text":"[i18n] <{player}> ","color":"gray"}},{{"text":"{message}","color":"white"}}]'
     rcon = RconConnection(address, port, password)
     try:
         if rcon.connect():
