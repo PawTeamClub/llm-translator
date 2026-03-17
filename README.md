@@ -4,6 +4,12 @@
 
 > 本插件的开发灵感来源于 MCDR插件 [SimpleTranslator - 插件仓库 - MCDReforged](https://mcdreforged.com/zh-CN/plugin/simple_translator)
 
+PawTeam进行了修改：
+现在无视聊天前缀t的要求，默认发消息会被翻译
+以及修复 velocitymcdrcommand和velocity_chat 插件冲突的问题
+
+
+
 使用大语言模型进行提供游戏内玩家对话翻译，木牌文字翻译，书籍翻译。
 
 插件默认使用 deepseek-chat 大语言模型进行翻译工作。
