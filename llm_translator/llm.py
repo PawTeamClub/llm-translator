@@ -12,6 +12,7 @@ class LLM:
 
     @staticmethod
     def use(message):
+        server = ServerInterface.get_instance()
         try:
             if config.enable_system_prompt:
                 system_content = config.system_prompt.format(
@@ -36,4 +37,5 @@ class LLM:
                 )
             return response.choices[0].message.content
         except Exception as e:
-            return e
+            server.logger.error(f"[LLM Translator] API call failed: {e}")
+            return f"[Translation Error] API call failed: {e}"
