@@ -75,6 +75,9 @@ def on_user_info(server: ServerInterface, info: Info):
     content = None
     
     try:
+        if not config.enable_chat_translation:
+            return
+            
         if "[lobby]" in info.content and not "[global:" in info.content:
             return
             
@@ -95,6 +98,14 @@ def on_user_info(server: ServerInterface, info: Info):
                     content = match.group(2)
         
         if content and not content.startswith('!!'):
+            # 检查聊天前缀
+            if config.chat_prefix and not content.startswith(config.chat_prefix):
+                return
+                
+            # 移除前缀
+            if config.chat_prefix:
+                content = content[len(config.chat_prefix):].strip()
+                
             translator_messages = LLM.use(content)
             if player:
                 server.say(f"§7[T]<{player}> " + f"§f{translator_messages}")

@@ -4,6 +4,11 @@ config = None
 
 
 def proxy_message(player, message):
+    if config is None:
+        server = ServerInterface.get_instance()
+        server.logger.error("[LLM Translator] Config not initialized")
+        return
+    
     for proxy_server in config.proxy_servers:
         try:
             proxy(
