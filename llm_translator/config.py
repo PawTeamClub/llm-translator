@@ -14,6 +14,14 @@ class Config(Serializable):
         {"address": "127.0.0.1", "port": 25575, "password": ""},
         {"address": "127.0.0.1", "port": 25576, "password": ""},
     ]
+    enable_chat_translation: bool = True
+    enable_sign_translation: bool = True
+    enable_book_translation: bool = True
+    chat_prefix: str = ""
+    max_retry_attempts: int = 3
+    retry_delay: int = 2
+    translation_cache_size: int = 50
+    enable_translation_cache: bool = True
 
 
 
